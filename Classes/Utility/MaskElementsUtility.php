@@ -13,7 +13,8 @@ class MaskElementsUtility
             $fieldTsConfig = '';
             if ($fields = $elems['columnsOverrides']){
                 foreach ($fields as $fieldKey => $field) {
-                    $fieldName = $field['label'] ? $this->dashesToCamelCase($field['label']) : $fieldKey;
+                    // $fieldName = $field['label'] ? $this->dashesToCamelCase($field['label']) : $fieldKey;
+                    $fieldName = $this->getTyposcriptFieldKey($fieldKey);
                     $fieldType = $this->getFieldType($fieldKey);
                     if (!key_exists($fieldKey, $GLOBALS['TCA'])) {
                         $fieldTsConfig .= $this->getFieldTypoScript($fieldType, $fieldKey, $fieldName);
@@ -23,7 +24,8 @@ class MaskElementsUtility
                         $nestedFieldTsConfig = '';
                         $nestedFields = $this->getNestedFields($GLOBALS['TCA'][$fieldKey]);
                         foreach($nestedFields as $nestedFieldKey => $nestedField) {
-                            $nestedFieldName = $nestedField['label'] ? $this->dashesToCamelCase($nestedField['label']) : $nestedFieldKey;
+                            // $nestedFieldName = $nestedField['label'] ? $this->dashesToCamelCase($nestedField['label']) : $nestedFieldKey;
+                            $nestedFieldName = $this->getTyposcriptFieldKey($nestedFieldKey);
                             $nestedFieldTsConfig .= $this->getFieldTypoScript($nestedField['type'], $nestedFieldKey, $nestedFieldName);
                         }
 
@@ -82,6 +84,12 @@ class MaskElementsUtility
         return $elements;
     }
 
+    private function getTyposcriptFieldKey($key)
+    {
+        $key = str_replace("tx_mask_", "", $key);
+        return $key;
+    }
+
     private function dashesToCamelCase($string, $capitalizeFirstCharacter = false)
     {
         $str = str_replace([' ', '-'], '', ucwords(str_replace(' ', ' ', $string)));
@@ -137,7 +145,7 @@ class MaskElementsUtility
                         parameter {
                             field = $fieldKey
                         }
-                        returnLast = result
+                        returnLast = url
                     }
                 }
             ",
@@ -152,7 +160,8 @@ class MaskElementsUtility
             $nestedChildFields = $this->getNestedFields($GLOBALS['TCA'][$fieldKey]);
 
                 foreach($nestedChildFields as $childKey => $childFieldsValue) {
-                    $childNestedFieldName = $childFieldsValue['label'] ? $this->dashesToCamelCase($childFieldsValue['label']) : $childKey;
+                    // $childNestedFieldName = $childFieldsValue['label'] ? $this->dashesToCamelCase($childFieldsValue['label']) : $childKey;
+                    $childNestedFieldName = $this->getTyposcriptFieldKey($childKey);
                     $childFieldsTsConfig .= $this->getFieldTypoScript($childFieldsValue['type'], $childKey, $childNestedFieldName);
                     $childFieldsTsConfig .= $this->getChildFieldTyposcript($childFieldsValue['type'], $childKey, $childNestedFieldName);
                 }
@@ -216,7 +225,7 @@ class MaskElementsUtility
                         parameter {
                             field = $fieldKey
                         }
-                        returnLast = result
+                        returnLast = url
                     }
                 }
             ",

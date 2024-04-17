@@ -1,16 +1,20 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Friendsoftypo3\HeadlessMask\:
-    resource: '../Classes/*'
+    Friendsoftypo3\HeadlessMask\:
+        resource: "../Classes/*"
 
-  Friendsoftypo3\HeadlessMask\Command\GenerateElementTsCommand:
-    tags:
-      -
-        name: console.command
-        command: 'headlessmask:generate'
-        description: 'Generate TypoScript of each elements'
+    Friendsoftypo3\HeadlessMask\Command\GenerateElementTsCommand:
+        tags:
+            - name: console.command
+              command: "headlessmask:generate"
+              description: "Generate TypoScript of each elements"
 
+    Friendsoftypo3\HeadlessMask\EventListener\MaskAfterElementSavedEventListener:
+        tags:
+            - name: event.listener
+              identifier: "executeCodeAfterChange"
+              event: MASK\Mask\Event\MaskAfterElementSavedEvent
