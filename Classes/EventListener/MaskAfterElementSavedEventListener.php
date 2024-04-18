@@ -11,7 +11,7 @@ class MaskAfterElementSavedEventListener
     public function __invoke(MaskAfterElementSavedEvent $event): void
     {
         // List of commands to execute
-        $command = [
+        $commands = [
             ['vendor/bin/typo3', 'cache:flush'],
             ['vendor/bin/typo3', 'headlessmask:generate'],
             ['vendor/bin/typo3', 'cache:warmup'],
