@@ -7,16 +7,16 @@ $EM_CONF['headless_mask'] = [
     'author_email' => 'info@nitsan.in',
     'category' => 'fe',
     'internal' => '',
-    'version' => '1.0.0',
+    'version' => '13.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.0.0-12.5.99',
-            'frontend' => '12.0.0-12.5.99',
+            'typo3' => '13.0.0-13.5.99',
+            'frontend' => '13.0.0-13.5.99',
         ],
         'conflicts' => [],
         'suggests' => [
-            'headless' => '2.0.0-4.9.9',
-            'mask' => '8.0.0-8.9.9'
+            'headless' => '4.0.0-4.9.9',
+            'mask' => '9.0.0-9.9.9'
         ],
     ],
 ];
