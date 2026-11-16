@@ -1,7 +1,7 @@
 {
   "name": "friendsoftypo3/headless_mask",
   "type": "typo3-cms-extension",
-  "version": "13.0.1",
+  "version": "14.0.0",
   "description": "Support headless for the mask elements",
   "keywords": [
     "TYPO3",
@@ -24,13 +24,13 @@
     }
   ],
   "require": {
-    "typo3/cms-core": "^13.0",
-    "mask/mask": "^9.0",
+    "typo3/cms-core": "^14.0",
+    "michael-nussbaumer/mask": "^14.0",
     "symfony/process": "^7.1"
   },
   "suggest": {
-    "friendsoftypo3/headless": "^4.5",
-    "mask/mask": "^9.0"
+    "friendsoftypo3/headless": "^5",
+    "michael-nussbaumer/mask": "^9.0"
   },
   "extra": {
      "typo3/cms": {
